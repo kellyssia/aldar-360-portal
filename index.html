@@ -432,6 +432,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: 2;
   }
   .nav-name {
     font-size: 13px;
@@ -563,6 +564,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: 2;
   }
   .welcome-avatar .init {
     position: absolute;
@@ -973,6 +975,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: 2;
   }
   .child-avatar .init-fallback {
     position: absolute;
@@ -1765,7 +1768,9 @@
       </div>
       <div class="nav-user">
         <div class="nav-avatar">
-          <img src="images/andy.jpg" alt="Andy" onerror="this.style.display='none';" />
+          <img src="images/andy.jpg" alt="Andy"
+               onload="this.nextElementSibling.style.display='none'"
+               onerror="this.style.display='none'" />
           <span>AT</span>
         </div>
         <span class="nav-name">Andy Thomas</span>
@@ -1819,19 +1824,21 @@
       <div class="welcome fade-in">
         <div class="welcome-left">
           <div class="welcome-avatar">
-            <img src="images/andy.jpg" alt="Andy Thomas" onerror="this.style.display='none';" />
+            <img src="images/andy.jpg" alt="Andy Thomas"
+                 onload="this.nextElementSibling.style.display='none'"
+                 onerror="this.style.display='none'" />
             <div class="init">AT</div>
           </div>
           <div class="welcome-copy">
-            <h1>Good evening, <em>Andy</em></h1>
+            <h1><span id="greeting">Good evening</span>, <em>Andy</em></h1>
             <p class="tagline">
               <span>12 years with Aldar</span> · 3 properties · 2 children at Al Yasmina · Gold member since 2019
             </p>
           </div>
         </div>
         <div class="welcome-date">
-          <div class="day">21</div>
-          <div>April 2026</div>
+          <div class="day" id="todayDay">21</div>
+          <div id="todayMonthYear">April 2026</div>
         </div>
       </div>
 
@@ -1963,7 +1970,9 @@
           <div class="children-col">
             <div class="child">
               <div class="child-avatar fallback-f">
-                <img src="images/florence.png" alt="Florence" onerror="this.style.display='none';" />
+                <img src="images/florence.png" alt="Florence"
+                     onload="this.nextElementSibling.style.display='none'"
+                     onerror="this.style.display='none'" />
                 <div class="init-fallback">F</div>
               </div>
               <div class="child-info">
@@ -1974,7 +1983,9 @@
             </div>
             <div class="child">
               <div class="child-avatar fallback-l">
-                <img src="images/leo.png" alt="Leo" onerror="this.style.display='none';" />
+                <img src="images/leo.png" alt="Leo"
+                     onload="this.nextElementSibling.style.display='none'"
+                     onerror="this.style.display='none'" />
                 <div class="init-fallback">L</div>
               </div>
               <div class="child-info">
@@ -2255,6 +2266,27 @@
 </script>
 
 <script>
+  // DYNAMIC DATE + GREETING
+  (function() {
+    var now = new Date();
+    var day = now.getDate();
+    var months = ['January','February','March','April','May','June',
+                  'July','August','September','October','November','December'];
+    var monthYear = months[now.getMonth()] + ' ' + now.getFullYear();
+
+    var dayEl = document.getElementById('todayDay');
+    var monthYearEl = document.getElementById('todayMonthYear');
+    if (dayEl) dayEl.textContent = day;
+    if (monthYearEl) monthYearEl.textContent = monthYear;
+
+    var hour = now.getHours();
+    var greeting = 'Good evening';
+    if (hour < 12) greeting = 'Good morning';
+    else if (hour < 17) greeting = 'Good afternoon';
+    var greetEl = document.getElementById('greeting');
+    if (greetEl) greetEl.textContent = greeting;
+  })();
+
   function doLogin() {
     document.getElementById('loginScreen').classList.add('hidden');
     setTimeout(function() {
