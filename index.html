@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>One Aldar · Andy Thomas</title>
-<link rel="icon" href="data:,">
+<link rel="icon" type="image/jpeg" href="images/favicon.jpg">
+<link rel="apple-touch-icon" href="images/favicon.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -1272,6 +1273,206 @@
     margin-top: 2px;
   }
 
+  /* Service charges */
+  .charges-card {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .charges-summary {
+    background: linear-gradient(160deg, var(--black) 0%, #1A1510 100%);
+    color: #fff;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 280px;
+  }
+  .charges-summary::before {
+    content: '';
+    position: absolute;
+    top: -20%; right: -15%;
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, rgba(184,150,90,0.25), transparent 65%);
+    pointer-events: none;
+  }
+  .charges-summary-top {
+    position: relative;
+    z-index: 2;
+  }
+  .charges-eyebrow {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .charges-total-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .charges-total {
+    font-family: 'Fraunces', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -1.5px;
+    margin-bottom: 4px;
+  }
+  .charges-total .ccy {
+    font-size: 20px;
+    color: var(--gold);
+    margin-right: 4px;
+    letter-spacing: 0;
+  }
+  .charges-due {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 6px;
+  }
+  .charges-countdown {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: rgba(184,150,90,0.15);
+    border: 1px solid rgba(184,150,90,0.3);
+    border-radius: 999px;
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    margin-top: 12px;
+  }
+  .charges-countdown .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+  .charges-summary-btn {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 13px;
+    margin-top: 20px;
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .charges-summary-btn:hover {
+    background: #fff;
+    transform: translateY(-1px);
+  }
+  .charges-list {
+    padding: 8px 0;
+  }
+  .charge-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-soft);
+    transition: background 0.15s;
+  }
+  .charge-row:last-child { border-bottom: none; }
+  .charge-row:hover { background: var(--sand-wash); }
+  .charge-row-icon {
+    width: 40px; height: 40px;
+    background: var(--sand-wash);
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .charge-row.paid .charge-row-icon {
+    background: rgba(91,123,74,0.12);
+    color: var(--success);
+  }
+  .charge-row-info { flex: 1; min-width: 0; }
+  .charge-row-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--black-soft);
+    margin-bottom: 2px;
+  }
+  .charge-row-meta {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .charge-row-right {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .charge-row-amt {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--black-soft);
+    font-weight: 400;
+    letter-spacing: -0.3px;
+  }
+  .charge-row.paid .charge-row-amt {
+    color: var(--muted);
+    font-size: 14px;
+    text-decoration: line-through;
+    text-decoration-color: rgba(0,0,0,0.2);
+  }
+  .charge-row-tag {
+    display: inline-block;
+    margin-top: 3px;
+    font-size: 9px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .charge-row-tag.due {
+    background: var(--gold-soft);
+    color: var(--gold-deep);
+  }
+  .charge-row-tag.paid-tag {
+    background: rgba(91,123,74,0.12);
+    color: var(--success);
+  }
+  .charge-row-btn {
+    margin-left: 10px;
+    padding: 7px 14px;
+    background: var(--black);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .charge-row-btn:hover { background: var(--gold-deep); }
+
   /* Loyalty */
   .loyalty-card {
     background: linear-gradient(135deg, var(--black) 0%, #1A1510 100%);
@@ -1957,6 +2158,69 @@
         </div>
       </div>
 
+      <!-- Service Charges -->
+      <div class="section fade-in">
+        <div class="section-header">
+          <div>
+            <div class="section-eyebrow">Payments</div>
+            <div class="section-title">Service charges</div>
+          </div>
+          <span class="section-link" onclick="openModal('payall')">Pay all →</span>
+        </div>
+        <div class="charges-card">
+          <div class="charges-summary">
+            <div class="charges-summary-top">
+              <div class="charges-eyebrow">Q2 2026 · Outstanding</div>
+              <div class="charges-total-label">Total due</div>
+              <div class="charges-total"><span class="ccy">AED</span>8,130</div>
+              <div class="charges-due">Across 2 properties · due 30 April 2026</div>
+              <div class="charges-countdown"><span class="dot"></span>9 days remaining</div>
+            </div>
+            <button class="charges-summary-btn" onclick="openModal('payall')">Pay all charges</button>
+          </div>
+
+          <div class="charges-list">
+            <div class="charge-row">
+              <div class="charge-row-icon">🏠</div>
+              <div class="charge-row-info">
+                <div class="charge-row-name">Yas Acres Villa</div>
+                <div class="charge-row-meta">Magnolia Plot 28 · Q2 2026 community fee</div>
+                <span class="charge-row-tag due">Due 30 Apr</span>
+              </div>
+              <div class="charge-row-right">
+                <div class="charge-row-amt">AED 4,850</div>
+              </div>
+              <button class="charge-row-btn" onclick="openModal('paysingle')">Pay</button>
+            </div>
+
+            <div class="charge-row">
+              <div class="charge-row-icon">🏢</div>
+              <div class="charge-row-info">
+                <div class="charge-row-name">Saadiyat Reserve</div>
+                <div class="charge-row-meta">Apartment 14B · Q2 2026 community fee</div>
+                <span class="charge-row-tag due">Due 30 Apr</span>
+              </div>
+              <div class="charge-row-right">
+                <div class="charge-row-amt">AED 3,280</div>
+              </div>
+              <button class="charge-row-btn" onclick="openModal('paysingle')">Pay</button>
+            </div>
+
+            <div class="charge-row paid">
+              <div class="charge-row-icon">✓</div>
+              <div class="charge-row-info">
+                <div class="charge-row-name">Noya Townhouse</div>
+                <div class="charge-row-meta">Townhouse 7 · Q1 2026 community fee</div>
+                <span class="charge-row-tag paid-tag">Paid 12 Jan</span>
+              </div>
+              <div class="charge-row-right">
+                <div class="charge-row-amt">AED 2,920</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- Family -->
       <div class="section fade-in">
         <div class="section-header">
@@ -2204,6 +2468,67 @@
       </div>
 
     </main>
+  </div>
+</div>
+
+<!-- Modal: Pay all service charges -->
+<div class="modal-overlay" id="modal-payall" onclick="if(event.target===this)closeModal('payall')">
+  <div class="modal">
+    <div class="modal-title">Pay all service charges</div>
+    <div class="modal-sub">Settle Q2 2026 charges across all outstanding properties.</div>
+
+    <div style="background:var(--bg);border:1px solid var(--border-soft);border-radius:8px;padding:14px 16px;margin-bottom:18px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;">
+        <div style="font-size:12px;color:var(--text-mid);">Yas Acres Villa</div>
+        <div style="font-family:'Fraunces',serif;font-size:14px;color:var(--black-soft);">AED 4,850</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-top:1px solid var(--border-soft);">
+        <div style="font-size:12px;color:var(--text-mid);">Saadiyat Reserve</div>
+        <div style="font-family:'Fraunces',serif;font-size:14px;color:var(--black-soft);">AED 3,280</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 0;margin-top:6px;border-top:1px solid var(--border);">
+        <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1.2px;">Total</div>
+        <div style="font-family:'Fraunces',serif;font-size:22px;color:var(--black-soft);font-weight:400;"><span style="color:var(--gold-deep);font-size:13px;margin-right:3px;">AED</span>8,130</div>
+      </div>
+    </div>
+
+    <label>Payment method</label>
+    <select>
+      <option>Visa · ending 4821</option>
+      <option>Mastercard · ending 9034</option>
+      <option>Add new card</option>
+    </select>
+
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal('payall')">Cancel</button>
+      <button class="btn-primary" onclick="closeModal('payall');showToast('Payment confirmed — AED 8,130 · Ref PAY-2026-1284')">Pay AED 8,130</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Pay single charge -->
+<div class="modal-overlay" id="modal-paysingle" onclick="if(event.target===this)closeModal('paysingle')">
+  <div class="modal">
+    <div class="modal-title">Pay service charge</div>
+    <div class="modal-sub">Select the property and complete payment.</div>
+
+    <label>Property</label>
+    <select id="paysingleProperty">
+      <option data-amt="4850">Yas Acres Villa · AED 4,850</option>
+      <option data-amt="3280">Saadiyat Reserve · AED 3,280</option>
+    </select>
+
+    <label>Payment method</label>
+    <select>
+      <option>Visa · ending 4821</option>
+      <option>Mastercard · ending 9034</option>
+      <option>Add new card</option>
+    </select>
+
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal('paysingle')">Cancel</button>
+      <button class="btn-primary" onclick="closeModal('paysingle');showToast('Payment confirmed · Ref PAY-2026-1285')">Confirm payment</button>
+    </div>
   </div>
 </div>
 
