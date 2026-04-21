@@ -1437,6 +1437,27 @@
     text-decoration: line-through;
     text-decoration-color: rgba(0,0,0,0.2);
   }
+  .charge-row.overdue {
+    background: linear-gradient(90deg, rgba(184,112,77,0.06) 0%, transparent 100%);
+    border-left: 3px solid var(--clay);
+  }
+  .charge-row.overdue .charge-row-icon {
+    background: var(--clay);
+    color: #fff;
+  }
+  .charges-countdown.urgent {
+    background: rgba(184,112,77,0.18);
+    border-color: rgba(184,112,77,0.45);
+    color: var(--clay);
+  }
+  .charges-countdown.urgent .dot {
+    background: var(--clay);
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
   .charge-row-tag {
     display: inline-block;
     margin-top: 3px;
@@ -1455,6 +1476,10 @@
     background: rgba(91,123,74,0.12);
     color: var(--success);
   }
+  .charge-row-tag.overdue-tag {
+    background: rgba(184,112,77,0.14);
+    color: var(--clay);
+  }
   .charge-row-btn {
     margin-left: 10px;
     padding: 7px 14px;
@@ -1470,8 +1495,10 @@
     cursor: pointer;
     transition: all 0.2s;
     white-space: nowrap;
+    text-decoration: none;
+    display: inline-block;
   }
-  .charge-row-btn:hover { background: var(--gold-deep); }
+  .charge-row-btn:hover { background: var(--gold-deep); color: #fff; }
 
   /* Loyalty */
   .loyalty-card {
@@ -2170,16 +2197,29 @@
         <div class="charges-card">
           <div class="charges-summary">
             <div class="charges-summary-top">
-              <div class="charges-eyebrow">Q2 2026 · Outstanding</div>
+              <div class="charges-eyebrow">Outstanding · Action required</div>
               <div class="charges-total-label">Total due</div>
-              <div class="charges-total"><span class="ccy">AED</span>8,130</div>
-              <div class="charges-due">Across 2 properties · due 30 April 2026</div>
-              <div class="charges-countdown"><span class="dot"></span>9 days remaining</div>
+              <div class="charges-total"><span class="ccy">AED</span>11,050</div>
+              <div class="charges-due">Across 3 properties · 1 overdue</div>
+              <div class="charges-countdown urgent"><span class="dot"></span>1 overdue · settle now</div>
             </div>
             <button class="charges-summary-btn" onclick="openModal('payall')">Pay all charges</button>
           </div>
 
           <div class="charges-list">
+            <div class="charge-row overdue">
+              <div class="charge-row-icon">⚠</div>
+              <div class="charge-row-info">
+                <div class="charge-row-name">Noya Townhouse</div>
+                <div class="charge-row-meta">Townhouse 7 · Q1 2026 community fee</div>
+                <span class="charge-row-tag overdue-tag">Overdue</span>
+              </div>
+              <div class="charge-row-right">
+                <div class="charge-row-amt">AED 2,920</div>
+              </div>
+              <a class="charge-row-btn" href="payment.html?ref=ALD-2026-DEMO&amount=2920&label=Noya+Townhouse+Q1+2026">Pay</a>
+            </div>
+
             <div class="charge-row">
               <div class="charge-row-icon">🏠</div>
               <div class="charge-row-info">
@@ -2190,7 +2230,7 @@
               <div class="charge-row-right">
                 <div class="charge-row-amt">AED 4,850</div>
               </div>
-              <button class="charge-row-btn" onclick="openModal('paysingle')">Pay</button>
+              <a class="charge-row-btn" href="payment.html?ref=ALD-2026-DEMO-YA&amount=4850&label=Yas+Acres+Villa+Q2+2026">Pay</a>
             </div>
 
             <div class="charge-row">
@@ -2203,19 +2243,7 @@
               <div class="charge-row-right">
                 <div class="charge-row-amt">AED 3,280</div>
               </div>
-              <button class="charge-row-btn" onclick="openModal('paysingle')">Pay</button>
-            </div>
-
-            <div class="charge-row paid">
-              <div class="charge-row-icon">✓</div>
-              <div class="charge-row-info">
-                <div class="charge-row-name">Noya Townhouse</div>
-                <div class="charge-row-meta">Townhouse 7 · Q1 2026 community fee</div>
-                <span class="charge-row-tag paid-tag">Paid 12 Jan</span>
-              </div>
-              <div class="charge-row-right">
-                <div class="charge-row-amt">AED 2,920</div>
-              </div>
+              <a class="charge-row-btn" href="payment.html?ref=ALD-2026-DEMO-SR&amount=3280&label=Saadiyat+Reserve+Q2+2026">Pay</a>
             </div>
           </div>
         </div>
@@ -2475,59 +2503,34 @@
 <div class="modal-overlay" id="modal-payall" onclick="if(event.target===this)closeModal('payall')">
   <div class="modal">
     <div class="modal-title">Pay all service charges</div>
-    <div class="modal-sub">Settle Q2 2026 charges across all outstanding properties.</div>
+    <div class="modal-sub">Settle all outstanding charges in one secure transaction.</div>
 
     <div style="background:var(--bg);border:1px solid var(--border-soft);border-radius:8px;padding:14px 16px;margin-bottom:18px;">
       <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;">
-        <div style="font-size:12px;color:var(--text-mid);">Yas Acres Villa</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;background:rgba(184,112,77,0.14);color:var(--clay);text-transform:uppercase;letter-spacing:1px;">Overdue</span>
+          <div style="font-size:12px;color:var(--text-mid);">Noya Townhouse · Q1</div>
+        </div>
+        <div style="font-family:'Fraunces',serif;font-size:14px;color:var(--black-soft);">AED 2,920</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-top:1px solid var(--border-soft);">
+        <div style="font-size:12px;color:var(--text-mid);">Yas Acres Villa · Q2</div>
         <div style="font-family:'Fraunces',serif;font-size:14px;color:var(--black-soft);">AED 4,850</div>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-top:1px solid var(--border-soft);">
-        <div style="font-size:12px;color:var(--text-mid);">Saadiyat Reserve</div>
+        <div style="font-size:12px;color:var(--text-mid);">Saadiyat Reserve · Q2</div>
         <div style="font-family:'Fraunces',serif;font-size:14px;color:var(--black-soft);">AED 3,280</div>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0 0;margin-top:6px;border-top:1px solid var(--border);">
         <div style="font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1.2px;">Total</div>
-        <div style="font-family:'Fraunces',serif;font-size:22px;color:var(--black-soft);font-weight:400;"><span style="color:var(--gold-deep);font-size:13px;margin-right:3px;">AED</span>8,130</div>
+        <div style="font-family:'Fraunces',serif;font-size:22px;color:var(--black-soft);font-weight:400;"><span style="color:var(--gold-deep);font-size:13px;margin-right:3px;">AED</span>11,050</div>
       </div>
     </div>
 
-    <label>Payment method</label>
-    <select>
-      <option>Visa · ending 4821</option>
-      <option>Mastercard · ending 9034</option>
-      <option>Add new card</option>
-    </select>
-
     <div class="modal-actions">
       <button class="btn-ghost" onclick="closeModal('payall')">Cancel</button>
-      <button class="btn-primary" onclick="closeModal('payall');showToast('Payment confirmed — AED 8,130 · Ref PAY-2026-1284')">Pay AED 8,130</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal: Pay single charge -->
-<div class="modal-overlay" id="modal-paysingle" onclick="if(event.target===this)closeModal('paysingle')">
-  <div class="modal">
-    <div class="modal-title">Pay service charge</div>
-    <div class="modal-sub">Select the property and complete payment.</div>
-
-    <label>Property</label>
-    <select id="paysingleProperty">
-      <option data-amt="4850">Yas Acres Villa · AED 4,850</option>
-      <option data-amt="3280">Saadiyat Reserve · AED 3,280</option>
-    </select>
-
-    <label>Payment method</label>
-    <select>
-      <option>Visa · ending 4821</option>
-      <option>Mastercard · ending 9034</option>
-      <option>Add new card</option>
-    </select>
-
-    <div class="modal-actions">
-      <button class="btn-ghost" onclick="closeModal('paysingle')">Cancel</button>
-      <button class="btn-primary" onclick="closeModal('paysingle');showToast('Payment confirmed · Ref PAY-2026-1285')">Confirm payment</button>
+      <a class="btn-primary" style="text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;"
+         href="payment.html?ref=ALD-2026-DEMO-ALL&amount=11050&label=All+Service+Charges">Continue to pay · AED 11,050</a>
     </div>
   </div>
 </div>
